@@ -1,2 +1,3 @@
+opencv-python-headless
 git+https://github.com/BlueMirrors/cvu
 vidsz
