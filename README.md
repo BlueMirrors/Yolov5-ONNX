@@ -1,8 +1,10 @@
 # Yolov5-ONNX
 
-![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/)
+[![made-with-python](https://img.shields.io/badge/Made%20with-Python-1f425f.svg)](https://www.python.org/) [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/drive/1h2Nv9DA4X0bgCnoF0nCVEwKAatptezNk?usp=sharing)
 
 YOLOv5 inference using ONNX, with no complicated installations setup and zero precession loss!
+
+[Google-Colab](https://colab.research.google.com/drive/1h2Nv9DA4X0bgCnoF0nCVEwKAatptezNk?usp=sharing)
 
 ## Inference with ONNX
 
