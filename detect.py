@@ -41,6 +41,27 @@ def detect_video(device, weight, input_video, output_video=None):
     reader.release()
 
 
+def detect_image(device, weight, image_path, output_image):
+    # load model
+    model = Yolov5Onnx(classes="coco",
+                       backend="onnx",
+                       weight=weight,
+                       device=device)
+
+    # read image
+    image = cv2.imread(image_path)
+
+    # inference
+    preds = model(image)
+    print(preds)
+
+    # draw image
+    preds.draw(image)
+
+    # write image
+    cv2.imwrite(output_image, image)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument('--weights',
@@ -62,6 +83,18 @@ if __name__ == "__main__":
 
     opt = parser.parse_args()
 
-    if not os.path.exists(opt.input) and opt.input == 'people.mp4':
-        gdrive_download("1rioaBCzP9S31DYVh-tHplQ3cgvgoBpNJ", "people.mp4")
+    # image file
+    input_ext = os.path.splitext(opt.input)[-1]
+    output_ext = os.path.splitext(opt.output)[-1]
+
+    if input_ext in (".jpg", ".jpeg", ".png"):
+        if output_ext not in ((".jpg", ".jpeg", ".png")):
+            opt.output = opt.output.replace(output_ext, input_ext)
+        detect_image(opt.device, opt.weights, opt.input, opt.output)
+
+    # video file
+    else:
+        if not os.path.exists(opt.input) and opt.input == 'people.mp4':
+            gdrive_download("1rioaBCzP9S31DYVh-tHplQ3cgvgoBpNJ", "people.mp4")
+
         detect_video(opt.device, opt.weights, opt.input, opt.output)
